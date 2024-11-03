@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AnimatedTrafficLightView: View {
+    private static let bulbsCount: Int = 2
     @State private var currentLight: TrafficLight = .green
 
     var body: some View {
@@ -19,7 +20,7 @@ struct AnimatedTrafficLightView: View {
             }
             .padding(20)
             .overlay(
-                RoundedRectangle(cornerSize: .init(width: 20, height: 20))
+                RoundedRectangle(cornerRadius: 20)
                     .stroke(Color.gray, lineWidth: 3)
             )
             
@@ -35,10 +36,14 @@ struct AnimatedTrafficLightView: View {
     }
     
     private func animateTrafficLight() {
+        func getNextLightRawValue(currentLightIndex: Int) -> Int {
+            return currentLightIndex + 1 > AnimatedTrafficLightView.bulbsCount ? 0 : currentLight.rawValue + 1
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + currentLight.duration) {
 
             withAnimation {
-                let nextLightRawValue = currentLight.rawValue + 1 > 2 ? 0 : currentLight.rawValue + 1
+                let nextLightRawValue = getNextLightRawValue(currentLightIndex: currentLight.rawValue)
                 guard let currentLight = TrafficLight(rawValue: nextLightRawValue) else {
                     return
                 }

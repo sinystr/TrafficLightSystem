@@ -17,10 +17,12 @@ struct TrafficLightView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Spacer().frame(height: 20)
+                Spacer()
+                    .frame(height: 20)
                 HStack {
                     Text(ScreensText.TrafficLightView.title)
-                    Text(viewModel.carModel).foregroundStyle(.blue)
+                    Text(viewModel.carModel)
+                        .foregroundStyle(.blue)
                         .bold()
                 }
                 AnimatedTrafficLightView()

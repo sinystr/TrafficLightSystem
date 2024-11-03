@@ -28,7 +28,7 @@ struct SetupCarView: View {
                     .padding(.vertical, 7)
                     .padding(.horizontal, 20)
                     .background(Capsule()
-                        .stroke(.blue, lineWidth: 1))
+                                    .stroke(.blue, lineWidth: 1))
                     
                     driveButton
                     
